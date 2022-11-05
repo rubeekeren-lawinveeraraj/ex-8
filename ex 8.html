@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    </head>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script> 
+    var emicalculator=angular.module("emicalculator",[]);
+    emicalculator.controller("emi",['$scope',function($scope){
+        
+        $scope.getrate=function(){
+               return $scope.amount*($scope.intrestrate/100)*$scope.term;
+        }
+            
+        
+        $scope.payable=function(){
+            return $scope.getrate()+$scope.amount;
+        }
+        
+        
+        $scope.monthly=function(){
+            
+            return  ($scope.amount+$scope.getrate())/($scope.term*12);
+        }
+        
+        
+        
+    }]);
+                
+    </script>    
+
+<body  ng-app="emicalculator">
+    
+    <div ng-controller="emi" style="margin-left:200px;margin-top:100px;width:250px;border-width:2px;border-style:solid;border-color:black;background-color:rgb(9, 113, 155);">
+    <table ><tr>
+        <td> Loan amount</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="number" ng-model="amount"></td></tr>
+        
+       <tr><td> Intrest rate </td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" ng-model="intrestrate"></td></tr>
+        
+       <tr><td> Loan term     </td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="number" ng-model="term"></td></tr>
+        
+        
+       </table>
+        
+        <p style="color:black">LOAN AMOUNT : {{amount|currency}}</p>
+        <P STYLE="COLOR:black">ONLY  INTERST AMOUNT BY {{term}} YEARS:   
+        
+        <P STYLE="COLOR:black">TOTAL payable amount : {{payable()|currency}}</P><hr>
+       
+      <hr><P STYLE="COLOR:black">EMI PER MONTH:  {{monthly()|currency}}</P><hr><hr>
+   
+    </div>
+    </body>
+</html>
